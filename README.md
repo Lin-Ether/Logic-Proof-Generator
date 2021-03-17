@@ -1,2 +1,2 @@
-# Logic-Operator
-Automatically produce results for the logic operation.
+# Logic-Proof
+Automatically produce the proof for the logic expressions. 
