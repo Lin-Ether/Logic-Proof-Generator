@@ -1,2 +1,2 @@
-# Logic-Proof
-Automatically produce the proof for the logic expressions. 
+# Logic-Proof-Generator
+Automatically generate the logic proof for an argument.
