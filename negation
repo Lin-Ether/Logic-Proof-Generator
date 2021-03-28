@@ -1,0 +1,44 @@
+string negation(string ex1)
+{
+	int ct=0,ct2=0,flag=0;
+	if (ex1.length()==2) ex1.erase(0,1);
+	else if (ex1.length()==1) ex1.insert(0,"~");
+	else if (ex1[0]=='~' and ex1[1]=='(' and ex1[ex1.length()-1]==')')
+	{
+		for (int j=0; j<=ex1.length()-1; j++)
+		{
+			
+			if (ex1[j]=='(') 
+			{
+				ct++;
+				flag=1;
+			}
+			if (ex1[j]==')') 
+			{
+				ct--;
+				flag=1;
+			}
+			if (flag==1 and ct==0)
+			{
+				ct2++;
+				flag=0;
+			}
+		}
+		if (ct2!=2)
+		{
+			ex1.erase(0,2);
+			ex1.erase(ex1.length()-1,1);
+		}
+		else 
+		{
+			ex1.insert(0,"~(");
+			ex1.insert(ex1.length(),")");
+		}
+	}
+	else
+	{
+		ex1.insert(0,"~(");
+		ex1.insert(ex1.length(),")");
+	}
+	return ex1;
+}
