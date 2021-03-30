@@ -3,7 +3,7 @@
 using namespace std;
 
 string a[20000],n[20000],op,sub1,sub2;
-long long b[27],p1,p2,p3,p4,counter=0,k;
+long long b[27],p1,p2,p3,p4,counter=0,k,l;
 int i=0;
 bool c[20000],d[27],s=false,t1,t2,boo=true;
 string o;
@@ -604,7 +604,6 @@ int main()
 		cout<<i<<")ASM: "<<a[i]<<endl; 
 	else cout<<" "<<i<<")ASM: "<<a[i]<<endl; 
 	int j=1;
-	k=i;
 	while (1>0)
 	{
 		if (j==1 and counter!=0 and s!=true) counter=0;
@@ -612,7 +611,6 @@ int main()
 		if (j==1 and counter==0 and s!=true) s=true;
 		while (operation(a[j])=="0" or c[j]==false)
 		{
-			//cout<<j<<endl;
 			j++;
 			j=(j-1)%i+1;
 			if (j==1 and counter!=0) counter=0;
@@ -668,70 +666,138 @@ int main()
 				counter++;
 			}
 		}
-		if (operation(a[i])=="0")
+		l=i;
+		if (operation(a[l])=="0")
 		{
-			for (int k=1; k<=i; k++)//while(?)
+			for (int k=1; k<=i; k++)
 			{
 				if (operation(a[k])=="&") t1=true;
 				else t1=false;
-				if (c[k]!=false and t1!=tf(a[k]) and (prestr(a[k])==a[i] or prestr(a[k])==negation(a[i]) or poststr(a[k])==a[i] or poststr(a[k])==negation(a[i])))
-				{cout<<k<<" "<<i<<endl;
+				if (c[k]!=false and t1!=tf(a[k]) and (prestr(a[k])==a[l] or prestr(a[k])==negation(a[l]) or poststr(a[k])==a[l] or poststr(a[k])==negation(a[l])))
+				{	
 					if (operation(a[k])=="&")
 					{
-						if (prestr(a[k])==a[i]) 
+						if (prestr(a[k])==a[l]) 
 						{
 							c[k]=false;
 							a[i+1]=negation(poststr(a[k]));
-							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
-							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
 							i++;
 						}
-						if (poststr(a[k])==a[i]) 
+						if (poststr(a[k])==a[l]) 
 						{
 							c[k]=false;
 							a[i+1]=negation(prestr(a[k]));
-							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
-							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
 							i++;
 						}
 					}
 					if (operation(a[k])=="|")
 					{
-						//cout<<"pog";
-						if (prestr(a[k])==negation(a[i]))
+						if (prestr(a[k])==negation(a[l]))
 						{
 							c[k]=false;
 							a[i+1]=poststr(a[k]);
-							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
-							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
 							i++;
 						}
-						if (poststr(a[k])==negation(a[i]))
+						if (poststr(a[k])==negation(a[l]))
 						{
 							c[k]=false;
 							a[i+1]=prestr(a[k]);
-							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
-							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
 							i++;
 						}
 					}
 					if (operation(a[k])==">")
 					{
-						cout<<"pog";
-						if (prestr(a[k])==a[i])
+						if (prestr(a[k])==a[l])
 						{
 							c[k]=false;
 							a[i+1]=poststr(a[k]);
-							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
-							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
 							i++;
 						}
-						if (poststr(a[k])==negation(a[i]))
+						if (poststr(a[k])==negation(a[l]))
 						{
 							c[k]=false;
 							a[i+1]=negation(prestr(a[k]));
-							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
-							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<i<<")"<<endl;
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							i++;
+						}
+					}
+				}
+			}
+		}//the newly-generated substring also needs to be judged!!!
+		l=l-1;
+		if (operation(a[l])=="0")
+		{
+			for (int k=1; k<=i; k++)
+			{
+				if (operation(a[k])=="&") t1=true;
+				else t1=false;
+				if (c[k]!=false and t1!=tf(a[k]) and (prestr(a[k])==a[l] or prestr(a[k])==negation(a[l]) or poststr(a[k])==a[l] or poststr(a[k])==negation(a[l])))
+				{	
+					if (operation(a[k])=="&")
+					{
+						if (prestr(a[k])==a[l]) 
+						{
+							c[k]=false;
+							a[i+1]=negation(poststr(a[k]));
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							i++;
+						}
+						if (poststr(a[k])==a[l]) 
+						{
+							c[k]=false;
+							a[i+1]=negation(prestr(a[k]));
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							i++;
+						}
+					}
+					if (operation(a[k])=="|")
+					{
+						if (prestr(a[k])==negation(a[l]))
+						{
+							c[k]=false;
+							a[i+1]=poststr(a[k]);
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							i++;
+						}
+						if (poststr(a[k])==negation(a[l]))
+						{
+							c[k]=false;
+							a[i+1]=prestr(a[k]);
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							i++;
+						}
+					}
+					if (operation(a[k])==">")
+					{
+						if (prestr(a[k])==a[l])
+						{
+							c[k]=false;
+							a[i+1]=poststr(a[k]);
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							i++;
+						}
+						if (poststr(a[k])==negation(a[l]))
+						{
+							c[k]=false;
+							a[i+1]=negation(prestr(a[k]));
+							if (i+2>9) cout<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
+							else cout<<" "<<i+1<<")      "<<a[i+1]<<"	(from "<<k<<" and "<<l<<")"<<endl;
 							i++;
 						}
 					}
@@ -739,11 +805,8 @@ int main()
 			}
 		}
 		
-		
-		
 		j++;
 		j=(j-1)%i+1;
-		//cout<<" ew ";
 	}
 	cin.get(); 
 } 
