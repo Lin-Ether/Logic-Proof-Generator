@@ -24,7 +24,7 @@ string negation(string ex1)
 				ct++;
 				flag=1;
 			}
-			if (ex1[j]==')') 
+			if (ex1[j]==')')
 			{
 				ct--;
 				flag=1;
