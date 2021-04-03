@@ -595,6 +595,7 @@ int main()
 	a[i]=negation(a[i]);
 	pr[i]<<i<<")ASM: "<<a[i]; 
 	int j=1;
+	
 	while (1>0)
 	{
 		if (j==1 and counter!=0 and s==true) counter=0;
@@ -620,7 +621,7 @@ int main()
 			{
 				i=max(m,k);
 				pr[i+1].str("");
-				pr[i+1]<<i+1<<")      "<<negation(a[po+1])<<"	(from "<<po+1<<"; "<<min(m,k)<<" contradicts "<<max(m,k)<<")";
+				pr[i+1]<<i+1<<")     "<<negation(a[po+1])<<"	(from "<<po+1<<"; "<<min(m,k)<<" contradicts "<<max(m,k)<<")";
 				validity=true;
 				i++;
 				boo2=false;
@@ -646,7 +647,7 @@ int main()
 						{
 							c[k]=false;
 							a[i+1]=negation(poststr(a[k]));
-							pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+							pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 							i++;
 							counter++;
 						}
@@ -654,7 +655,7 @@ int main()
 						{
 							c[k]=false;
 							a[i+1]=negation(prestr(a[k]));
-							pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+							pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 							i++;
 							counter++;
 
@@ -666,7 +667,7 @@ int main()
 						{
 							c[k]=false;
 							a[i+1]=poststr(a[k]);
-							pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+							pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 							i++;
 							counter++;
 						}
@@ -674,7 +675,7 @@ int main()
 						{
 							c[k]=false;
 							a[i+1]=prestr(a[k]);
-							pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+							pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 							i++;
 							counter++;
 						}
@@ -685,7 +686,7 @@ int main()
 						{
 							c[k]=false;
 							a[i+1]=poststr(a[k]);
-							pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+							pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 							i++;
 							counter++;
 						}
@@ -693,7 +694,7 @@ int main()
 						{
 							c[k]=false;
 							a[i+1]=negation(prestr(a[k]));
-							pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+							pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 							i++;
 							counter++;
 						}
@@ -708,8 +709,8 @@ int main()
 				c[j]=false;
 				a[i+1]=prestr(a[j]);
 				a[i+2]=poststr(a[j]);
-				pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<j<<")";
-				pr[i+2]<<i+2<<")      "<<a[i+2]<<"	(from "<<j<<")"; 
+				pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<j<<")";
+				pr[i+2]<<i+2<<")     "<<a[i+2]<<"	(from "<<j<<")"; 
 				i=i+2;
 				counter++;
 			}
@@ -718,8 +719,8 @@ int main()
 				c[j]=false;
 				a[i+1]=negation(prestr(a[j]));
 				a[i+2]=negation(poststr(a[j]));
-				pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<j<<")";
-				pr[i+2]<<i+2<<")      "<<a[i+2]<<"	(from "<<j<<")"; 
+				pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<j<<")";
+				pr[i+2]<<i+2<<")     "<<a[i+2]<<"	(from "<<j<<")"; 
 				i=i+2;
 				counter++;
 			}
@@ -728,8 +729,8 @@ int main()
 				c[j]=false;
 				a[i+1]=prestr(a[j]);
 				a[i+2]=negation(poststr(a[j]));
-				pr[i+1]<<i+1<<")      "<<a[i+1]<<"	(from "<<j<<")";
-				pr[i+2]<<i+2<<")      "<<a[i+2]<<"	(from "<<j<<")"; 
+				pr[i+1]<<i+1<<")     "<<a[i+1]<<"	(from "<<j<<")";
+				pr[i+2]<<i+2<<")     "<<a[i+2]<<"	(from "<<j<<")"; 
 				i=i+2;
 				counter++;
 			}
@@ -739,17 +740,37 @@ int main()
 		j=(j-1)%i+1;
 	}
 	
+	if (validity==false)
+	{ 
+		for (int k=1; k<=i; k++)
+		{
+			
+		}
+		for (int k=1;k<=i; k++)
+		{
+			if (operation(a[k])!="0") 
+			{
+				i++;
+				a[i]=prestr(a[k]);
+				pr[i]<<i<<")ASM: "<<a[i];
+				break;
+			}
+		}
+		
+	}
+	
+	
 	nums=log10(i);
 	for (int k=1; k<=po; k++)
-	{
-		for (int m=1; m<=nums-log10(k); m++) cout<<" ";
+	{	
+		for (int m=1; m<=ceil(nums-log10(k)); m++) cout<<" ";
 		cout<<pr[k].str()<<endl;
 	}
-	for (int m=1; m<=nums-log10(po); m++) cout<<" ";
+	for (int m=1; m<=ceil(nums-log10(po)); m++) cout<<" ";
 	cout<<con.str()<<endl;
 	for (int k=po+1; k<=i; k++)
 	{
-		for (int m=1; m<=nums-log10(k); m++) cout<<" ";
+		for (int m=1; m<=ceil(nums-log10(k)); m++) cout<<" ";
 		cout<<pr[k].str()<<endl;
 	}
 	if (validity==true) cout<<"VALID";
