@@ -763,6 +763,7 @@ int main()
 	nums=log10(i);
 	for (int k=1; k<=po; k++)
 	{	
+		
 		for (int m=1; m<=ceil(nums-log10(k)); m++) cout<<" ";
 		cout<<pr[k].str()<<endl;
 	}
