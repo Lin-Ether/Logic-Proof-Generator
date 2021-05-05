@@ -595,170 +595,169 @@ int main()
 	input_string[i]=negation(input_string[i]);
 	output_string[i]<<i<<")ASM: "<<input_string[i]; 
 	int j=1;
-	
 	while (1)
 	{
-		if (j==1 and counter!=0 and s==true) counter=0;
-		else if (j==1 and counter==0 and s==true) break;
-		else if (j==1 and counter==0 and s!=true) s=true;
-		while (c[j]==false)
+		while (1)
 		{
-			j++;
-			j=(j-1)%i+1;
-			if (j==1 and counter!=0) counter=0;
-			else if (j==1 and s!=true) s=true;
-			else if (j==1 and s==true) 
+			if (j==1 and counter!=0 and s==true) counter=0;
+			else if (j==1 and counter==0 and s==true) break;
+			else if (j==1 and counter==0 and s!=true) s=true;
+			while (c[j]==false)
 			{
-				boo=false;
-				break;
+				j++;
+				j=(j-1)%i+1;
+				if (j==1 and counter!=0) counter=0;
+				else if (j==1 and s!=true) s=true;
+				else if (j==1 and s==true) 
+				{
+					boo=false;
+					break;
+				}
 			}
-		}
-		if (boo==false or boo2==false) break;
-		for (int k=1; k<=i; k++)
-		{
-			for (int m=k+1; m<=i; m++)
-			if (c[k]!=false and operation(input_string[k])=="0" and operation(input_string[m])=="0" and input_string[k]==negation(input_string[m]))
-			{
-				i=max(m,k);
-				output_string[i+1].str("");
-				output_string[i+1]<<i+1<<")     "<<negation(input_string[po+1])<<"	(from "<<po+1<<"; "<<min(m,k)<<" contradicts "<<max(m,k)<<")";
-				validity=true;
-				i++;
-				boo2=false;
-				break;
-			}
-			if (boo2==false) break;
-		}
-		if (boo==false or boo2==false) break;
-		op=operation(input_string[j]);
-		if (op=="&") t1=true;
-		else t1=false;
-		if (operation(input_string[j])=="0")
-		{
+			if (boo==false or boo2==false) break;
 			for (int k=1; k<=i; k++)
 			{
-				if (operation(input_string[k])=="&") t1=true;
-				else t1=false;
-				if (c[k]!=false and t1!=tf(input_string[k]) and (prestr(input_string[k])==input_string[j] or prestr(input_string[k])==negation(input_string[j]) or poststr(input_string[k])==input_string[j] or poststr(input_string[k])==negation(input_string[j])))
-				{	
-					if (operation(input_string[k])=="&")
-					{
-						if (prestr(input_string[k])==input_string[j]) 
+				for (int m=k+1; m<=i; m++)
+				if (c[k]!=false and operation(input_string[k])=="0" and operation(input_string[m])=="0" and input_string[k]==negation(input_string[m]))
+				{
+					i=max(m,k);
+					output_string[i+1].str("");
+					output_string[i+1]<<i+1<<")     "<<negation(input_string[po+1])<<"	(from "<<po+1<<"; "<<min(m,k)<<" contradicts "<<max(m,k)<<")";
+					validity=true;
+					i++;
+					boo2=false;
+					break;
+				}
+				if (boo2==false) break;
+			}
+			if (boo==false or boo2==false) break;
+			op=operation(input_string[j]);
+			if (op=="&") t1=true;
+			else t1=false;
+			if (operation(input_string[j])=="0")
+			{
+				for (int k=1; k<=i; k++)
+				{
+					if (operation(input_string[k])=="&") t1=true;
+					else t1=false;
+					if (c[k]!=false and t1!=tf(input_string[k]) and (prestr(input_string[k])==input_string[j] or prestr(input_string[k])==negation(input_string[j]) or poststr(input_string[k])==input_string[j] or poststr(input_string[k])==negation(input_string[j])))
+					{	
+						if (operation(input_string[k])=="&")
 						{
-							c[k]=false;
-							input_string[i+1]=negation(poststr(input_string[k]));
-							output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
-							i++;
-							counter++;
+							if (prestr(input_string[k])==input_string[j]) 
+							{
+								c[k]=false;
+								input_string[i+1]=negation(poststr(input_string[k]));
+								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+								i++;
+								counter++;
+							}
+							if (poststr(input_string[k])==input_string[j]) 
+							{
+								c[k]=false;
+								input_string[i+1]=negation(prestr(input_string[k]));
+								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+								i++;
+								counter++;	
+							}
 						}
-						if (poststr(input_string[k])==input_string[j]) 
+						if (operation(input_string[k])=="|")
 						{
-							c[k]=false;
-							input_string[i+1]=negation(prestr(input_string[k]));
-							output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
-							i++;
-							counter++;
-
+							if (prestr(input_string[k])==negation(input_string[j]))
+							{
+								c[k]=false;
+								input_string[i+1]=poststr(input_string[k]);
+								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+								i++;
+								counter++;
+							}
+							if (poststr(input_string[k])==negation(input_string[j]))
+							{
+								c[k]=false;
+								input_string[i+1]=prestr(input_string[k]);
+								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+								i++;
+								counter++;
+							}
 						}
-					}
-					if (operation(input_string[k])=="|")
-					{
-						if (prestr(input_string[k])==negation(input_string[j]))
+						if (operation(input_string[k])==">")
 						{
-							c[k]=false;
-							input_string[i+1]=poststr(input_string[k]);
-							output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
-							i++;
-							counter++;
-						}
-						if (poststr(input_string[k])==negation(input_string[j]))
-						{
-							c[k]=false;
-							input_string[i+1]=prestr(input_string[k]);
-							output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
-							i++;
-							counter++;
-						}
-					}
-					if (operation(input_string[k])==">")
-					{
-						if (prestr(input_string[k])==input_string[j])
-						{
-							c[k]=false;
-							input_string[i+1]=poststr(input_string[k]);
-							output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
-							i++;
-							counter++;
-						}
-						if (poststr(input_string[k])==negation(input_string[j]))
-						{
-							c[k]=false;
-							input_string[i+1]=negation(prestr(input_string[k]));
-							output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
-							i++;
-							counter++;
+							if (prestr(input_string[k])==input_string[j])
+							{
+								c[k]=false;
+								input_string[i+1]=poststr(input_string[k]);
+								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+								i++;
+								counter++;
+							}
+							if (poststr(input_string[k])==negation(input_string[j]))
+							{
+								c[k]=false;
+								input_string[i+1]=negation(prestr(input_string[k]));
+								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
+								i++;
+								counter++;
+							}
 						}
 					}
 				}
 			}
-		}
-		if (tf(input_string[j])==t1)
-		{
-			if (op=="&") 
+			if (tf(input_string[j])==t1)
 			{
-				c[j]=false;
-				input_string[i+1]=prestr(input_string[j]);
-				input_string[i+2]=poststr(input_string[j]);
-				output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
-				output_string[i+2]<<i+2<<")     "<<input_string[i+2]<<"	(from "<<j<<")"; 
-				i=i+2;
-				counter++;
+				if (op=="&") 
+				{
+					c[j]=false;
+					input_string[i+1]=prestr(input_string[j]);
+					input_string[i+2]=poststr(input_string[j]);
+					output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
+					output_string[i+2]<<i+2<<")     "<<input_string[i+2]<<"	(from "<<j<<")"; 
+					i=i+2;
+					counter++;
+				}
+				if (op=="|")
+				{
+					c[j]=false;
+					input_string[i+1]=negation(prestr(input_string[j]));
+					input_string[i+2]=negation(poststr(input_string[j]));
+					output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
+					output_string[i+2]<<i+2<<")     "<<input_string[i+2]<<"	(from "<<j<<")"; 
+					i=i+2;
+					counter++;
+				}
+				if (op==">")
+				{
+					c[j]=false;
+					input_string[i+1]=prestr(input_string[j]);
+					input_string[i+2]=negation(poststr(input_string[j]));
+					output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
+					output_string[i+2]<<i+2<<")     "<<input_string[i+2]<<"	(from "<<j<<")"; 
+					i=i+2;
+					counter++;
+				}
 			}
-			if (op=="|")
-			{
-				c[j]=false;
-				input_string[i+1]=negation(prestr(input_string[j]));
-				input_string[i+2]=negation(poststr(input_string[j]));
-				output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
-				output_string[i+2]<<i+2<<")     "<<input_string[i+2]<<"	(from "<<j<<")"; 
-				i=i+2;
-				counter++;
-			}
-			if (op==">")
-			{
-				c[j]=false;
-				input_string[i+1]=prestr(input_string[j]);
-				input_string[i+2]=negation(poststr(input_string[j]));
-				output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
-				output_string[i+2]<<i+2<<")     "<<input_string[i+2]<<"	(from "<<j<<")"; 
-				i=i+2;
-				counter++;
-			}
-		}
-		
-		j++;
-		j=(j-1)%i+1;
+			
+			j++;
+			j=(j-1)%i+1;
+		}	
+		if (validity=true) break;
+		// else
+		// { 
+		// 	for (int k=1; k<=i; k++)
+		// 	{
+				
+		// 	}
+		// 	for (int k=1;k<=i; k++)
+		// 	{
+		// 		if (operation(input_string[k])!="0") 
+		// 		{
+		// 			i++;
+		// 			input_string[i]=prestr(input_string[k]);
+		// 			output_string[i]<<i<<")ASM: "<<input_string[i];
+		// 			break;
+		// 		}
+		// 	}
+		// }
 	}
-	
-//	if (validity==false)
-//	{ 
-//		for (int k=1; k<=i; k++)
-//		{
-//			
-//		}
-//		for (int k=1;k<=i; k++)
-//		{
-//			if (operation(input_string[k])!="0") 
-//			{
-//				i++;
-//				input_string[i]=prestr(input_string[k]);
-//				output_string[i]<<i<<")ASM: "<<input_string[i];
-//				break;
-//			}
-//		}
-//		
-//	}
-	
 	
 	nums=log10(i);
 	for (int k=1; k<=po; k++)
