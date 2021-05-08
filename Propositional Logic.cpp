@@ -4,7 +4,7 @@ using namespace std;
 string input_string[20000],n[20000],op,sub1,sub2;
 long long b[27],p1,p2,p3,p4,counter=0,k,l,po;
 int i=0,nums=0;
-bool c[20000],d[27],s=false,t1,t2,boo=true,validity=false,boo2=true;
+bool status[20000],d[27],s=false,t1,t2,boo=true,validity=false,boo2=true;
 string o;
 ostringstream output_string[20000],conclusion;
 
@@ -572,8 +572,8 @@ int main()
 	for (int j=1; j<=27; j++)
 		d[j]=false;
 		
-	for (int j=1; j<=27; j++)
-		c[j]=true;
+	for (int j=1; j<=20000; j++)
+		status[j]=true;
 	
     while (input_string[i]!="0")
 	{
@@ -602,7 +602,7 @@ int main()
 			if (j==1 and counter!=0 and s==true) counter=0;
 			else if (j==1 and counter==0 and s==true) break;
 			else if (j==1 and counter==0 and s!=true) s=true;
-			while (c[j]==false)
+			while (status[j]==false)
 			{
 				j++;
 				j=(j-1)%i+1;
@@ -618,7 +618,7 @@ int main()
 			for (int k=1; k<=i; k++)
 			{
 				for (int m=k+1; m<=i; m++)
-				if (c[k]!=false and operation(input_string[k])=="0" and operation(input_string[m])=="0" and input_string[k]==negation(input_string[m]))
+				if (status[k]!=false and operation(input_string[k])=="0" and operation(input_string[m])=="0" and input_string[k]==negation(input_string[m]))
 				{
 					i=max(m,k);
 					output_string[i+1].str("");
@@ -640,13 +640,13 @@ int main()
 				{
 					if (operation(input_string[k])=="&") t1=true;
 					else t1=false;
-					if (c[k]!=false and t1!=tf(input_string[k]) and (prestr(input_string[k])==input_string[j] or prestr(input_string[k])==negation(input_string[j]) or poststr(input_string[k])==input_string[j] or poststr(input_string[k])==negation(input_string[j])))
+					if (status[k]!=false and t1!=tf(input_string[k]) and (prestr(input_string[k])==input_string[j] or prestr(input_string[k])==negation(input_string[j]) or poststr(input_string[k])==input_string[j] or poststr(input_string[k])==negation(input_string[j])))
 					{	
 						if (operation(input_string[k])=="&")
 						{
 							if (prestr(input_string[k])==input_string[j]) 
 							{
-								c[k]=false;
+								status[k]=false;
 								input_string[i+1]=negation(poststr(input_string[k]));
 								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 								i++;
@@ -654,7 +654,7 @@ int main()
 							}
 							if (poststr(input_string[k])==input_string[j]) 
 							{
-								c[k]=false;
+								status[k]=false;
 								input_string[i+1]=negation(prestr(input_string[k]));
 								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 								i++;
@@ -665,7 +665,7 @@ int main()
 						{
 							if (prestr(input_string[k])==negation(input_string[j]))
 							{
-								c[k]=false;
+								status[k]=false;
 								input_string[i+1]=poststr(input_string[k]);
 								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 								i++;
@@ -673,7 +673,7 @@ int main()
 							}
 							if (poststr(input_string[k])==negation(input_string[j]))
 							{
-								c[k]=false;
+								status[k]=false;
 								input_string[i+1]=prestr(input_string[k]);
 								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 								i++;
@@ -684,7 +684,7 @@ int main()
 						{
 							if (prestr(input_string[k])==input_string[j])
 							{
-								c[k]=false;
+								status[k]=false;
 								input_string[i+1]=poststr(input_string[k]);
 								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 								i++;
@@ -692,7 +692,7 @@ int main()
 							}
 							if (poststr(input_string[k])==negation(input_string[j]))
 							{
-								c[k]=false;
+								status[k]=false;
 								input_string[i+1]=negation(prestr(input_string[k]));
 								output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<min(k,j)<<" and "<<max(k,j)<<")";
 								i++;
@@ -706,7 +706,7 @@ int main()
 			{
 				if (op=="&") 
 				{
-					c[j]=false;
+					status[j]=false;
 					input_string[i+1]=prestr(input_string[j]);
 					input_string[i+2]=poststr(input_string[j]);
 					output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
@@ -716,7 +716,7 @@ int main()
 				}
 				if (op=="|")
 				{
-					c[j]=false;
+					status[j]=false;
 					input_string[i+1]=negation(prestr(input_string[j]));
 					input_string[i+2]=negation(poststr(input_string[j]));
 					output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
@@ -726,7 +726,7 @@ int main()
 				}
 				if (op==">")
 				{
-					c[j]=false;
+					status[j]=false;
 					input_string[i+1]=prestr(input_string[j]);
 					input_string[i+2]=negation(poststr(input_string[j]));
 					output_string[i+1]<<i+1<<")     "<<input_string[i+1]<<"	(from "<<j<<")";
