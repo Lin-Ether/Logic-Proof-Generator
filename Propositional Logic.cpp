@@ -563,7 +563,7 @@ int main()
 	
 	cout<<"This program is for propositional logic."<<"\n\n";
 	cout<<"Capitalise the letters. You should put your conclusion in the last line."<<"\n\n";
-	cout<<"Use \"~\" for the negation sign; \">\" for the implies sign; \"&\" for the and sign; \"|\" for the or sign."<<"\n\n";
+	cout<<"Use \"~\" for the NEGATION sign; \">\" for the IMPLIES sign; \"&\" for the AND sign; \"|\" for the OR sign."<<"\n\n";
 	cout<<"End the input with \"0\"."<<"\n\n";
 
 	for (int j=1; j<=27; j++)
@@ -739,7 +739,7 @@ int main()
 			j++;
 			j=(j-1)%i+1;
 		}	
-		if (validity=true) break;
+		if (validity==true) break;
 		// else
 		// { 
 		// 	for (int k=1; k<=i; k++)
