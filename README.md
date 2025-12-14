@@ -1,7 +1,7 @@
 # Logic-Proof-Generator
 Automatically generate the logic proof for an argument.
 
-This programme is ongoing and hasn't been finished yet.
+This programme is in progress and hasn't been finished yet.
 
 Example:
 
